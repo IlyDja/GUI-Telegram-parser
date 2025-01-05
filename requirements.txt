@@ -1,0 +1,10 @@
+altgraph==0.17.4
+packaging==24.2
+pefile==2023.2.7
+pyaes==1.6.1
+pyinstaller==6.11.1
+pyinstaller-hooks-contrib==2024.11
+Pyrogram==2.0.106
+PySocks==1.7.1
+pywin32-ctypes==0.2.3
+setuptools==75.6.0
