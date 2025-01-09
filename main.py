@@ -110,8 +110,12 @@ def start_search():
             while True:
                 try:
                     for url in links:
-                        find_username_and_add_to_set(app, url)
-                        links = links[links.index(url):]
+                        try:
+                            find_username_and_add_to_set(app, url)
+                        except UsernameNotOccupied:
+                            pass
+                        finally:
+                            links = links[links.index(url):]
                     else:
                         break
                 except FloodWait as e:
