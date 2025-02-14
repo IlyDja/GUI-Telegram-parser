@@ -1,7 +1,8 @@
 import tkinter as tk
 from tkinter import simpledialog, messagebox, filedialog
 from pyrogram import Client
-from pyrogram.errors import SessionPasswordNeeded, PhoneCodeInvalid, PasswordHashInvalid, PhoneNumberBanned, FloodWait
+from pyrogram.errors import (SessionPasswordNeeded, PhoneCodeInvalid, PasswordHashInvalid, PhoneNumberBanned,
+                             FloodWait, UsernameNotOccupied)
 from datetime import datetime, timedelta
 import os
 import time
@@ -59,6 +60,7 @@ def start_search():
             application.connect()
             result_label.config(text='')
             root.update()
+            # autorization
             while True:
                 user_number = simpledialog.askstring(title="Введите номер телефона", prompt="Ваш номер телефона:")
                 sent_code_info = application.send_code(phone_number=user_number)
@@ -112,7 +114,9 @@ def start_search():
                     for url in links:
                         try:
                             find_username_and_add_to_set(app, url)
-                        except UsernameNotOccupied:
+                        # Было UsernameNotOccupied. Убрал. Потому что в тг что-то изменили видимо, и теперь при
+                        # слишком длинном имени канала возникала ошибка  [400 USERNAME_INVALID]
+                        except:
                             pass
                         finally:
                             links = links[links.index(url):]
